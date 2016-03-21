@@ -27,8 +27,7 @@ public class DecryptSQL {
     	int numCols = 0;
     	System.out.print("start connection ");
     	//connection a la base de données
-    	connection=ToolsDataBase.getConnection(file, DbType);
-    	
+    	connection=ToolsDataBase.getConnection(file, DbType); 	
 
     	//Liste des éléments de la base (table, view...)
     	DatabaseMetaData dma;
