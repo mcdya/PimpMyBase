@@ -57,8 +57,7 @@ public class DecryptSQL {
 			e.printStackTrace();
 			//DbTools.arret("Echec de la methode GetEntityFromSQL");
 		}
-    	    	
-  	
+    	    		
     }
 	/* *********************************************************************************************************
 	 * GetEntity
