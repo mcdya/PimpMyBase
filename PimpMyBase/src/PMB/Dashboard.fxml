@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="MainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="680.0" minWidth="850.0" stylesheets="/ressources/application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PMB.DashboardController">
+	<children>
+      <BorderPane prefHeight="680.0" prefWidth="850.0">
+         <top>
+      		<ToolBar id="navbar-brand" minHeight="80.0" minWidth="845.0" style="-fx-background-color: FFFFFF;" styleClass="navbar-brand" stylesheets="/ressources/application.css" BorderPane.alignment="CENTER">
+      			<items>
+      				<MenuBar id="navbar" fx:id="MainMenuBar" minHeight="30.0" minWidth="758.0" style="-fx-background-color: FFFFFF;" styleClass="navbar" translateX="-5.0" translateY="-8.0">
+      					<menus>
+      						<Menu mnemonicParsing="false" text="File">
+      							<items>
+                              <MenuItem fx:id="MenuItemOpenDB" mnemonicParsing="false" onAction="#GetDBFile" text="Ouvrir une base" />
+      								<MenuItem fx:id="MenuItemClose" mnemonicParsing="false" onAction="#Close_DashBoard" text="Close" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Edit">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="Delete" />
+      							</items>
+      						</Menu>
+      						<Menu mnemonicParsing="false" text="Help">
+      							<items>
+      								<MenuItem mnemonicParsing="false" text="About" />
+      							</items>
+      						</Menu>
+      					</menus>
+      				</MenuBar>
+      				<Button id="btn-primary" fx:id="BtnMenuClose" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Close_DashBoard" prefHeight="34.0" prefWidth="9.0" style="-fx-alignment: baseline-right; -fx-border-style: none;" styleClass="btn-default" stylesheets="/ressources/application.css" text="x" textAlignment="CENTER" translateY="-20.0" />
+      			</items>
+      		</ToolBar>
+         </top>
+         <left>
+            <TreeView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+	</children>
+	
+</VBox>
