@@ -45,7 +45,11 @@ public class DecryptSQL {
 	    		numCols= results.getMetaData().getColumnCount();
 	    		
 	    	   for (int i = 1; i <= numCols; i++)
-	    	      System.out.print(results.getString(i)+" ");
+	    		   try{
+		    		   if(!results.getString(i).isEmpty()){
+		    			   System.out.print(results.getString(i)+" ");
+		    		   }	    			   
+	    		   } catch (java.lang.NullPointerException e) {}    	      
 
 	    	}			
 	    	

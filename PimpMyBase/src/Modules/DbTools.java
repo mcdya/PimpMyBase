@@ -157,7 +157,7 @@ public class DbTools {
     		  MsgDriverErr="Type de connexion introuvable";              
     	} 	
     	
-    	//StrDriver="org.apache.derby.jdbc.EmbeddedDriver";
+    	//StrDriver="com.mysql.jdbc.driver";
     	//DBurl="jdbc:derby:";
 		// chargement du pilote
     	if(!StrDriver.isEmpty()){
