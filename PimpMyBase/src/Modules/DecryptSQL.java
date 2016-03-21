@@ -49,7 +49,6 @@ public class DecryptSQL {
 		    			   System.out.print(results.getString(i)+" ");
 		    		   }	    			   
 	    		   } catch (java.lang.NullPointerException e) {}    	      
-
 	    	}			
 	    	
 		} catch (SQLException e) {
