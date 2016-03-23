@@ -43,44 +43,16 @@ public final class FileChooserMod extends Application {
             openFile(file);
         }
     }
-    public void start(final Stage stage, String Title) {
-        String SuffixDoc="";
+    public File start(final Stage stage, String Title) {
+
     	stage.setTitle(Title);
         WindowsTitle=Title;
         final FileChooser fileChooser = new FileChooser();
         
         configureFileChooser(fileChooser);
         File file = fileChooser.showOpenDialog(stage);
-        if (file != null) {
-        	SuffixDoc=file.getName().substring(file.getName().length()-3);
-        	
-        	switch (SuffixDoc)
-        	{
-        	  case "sql":
-        		  System.out.println("base sql");
-        		  System.out.println("SuffixDoc : "+SuffixDoc);
-        		  try {
-					SQLmanager.GetEntitiesFromSQL(file.getCanonicalPath(), SuffixDoc);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        	    break; 
-        	  case "db3":
-        		  System.out.println("base sql");
-        		  System.out.println("SuffixDoc : "+SuffixDoc);
-        		  try {
-					SQLmanager.GetEntitiesFromSQL(file.getCanonicalPath(), SuffixDoc);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        	    break;        	    
-        	  default:
-        	    /*Action*/;             
-        	}       	
 
-        }
+        return file;
     } 
     
     public static void main(String[] args) {

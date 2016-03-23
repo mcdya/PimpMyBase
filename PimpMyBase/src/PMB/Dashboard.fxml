@@ -38,7 +38,7 @@
       		</ToolBar>
          </top>
          <left>
-            <TreeView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <TreeView fx:id="ElementsRoot" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </left>
       </BorderPane>
 	</children>

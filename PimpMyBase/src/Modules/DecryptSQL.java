@@ -20,17 +20,23 @@ public class DecryptSQL {
     private final String DB_PATH = System.getProperty("user.dir").toString();
     private final String DB_NAME = ""; //ex: DataBase\\CriterBase.db3
     private DbTools ToolsDataBase=new DbTools();
-
-    public void GetEntitiesFromSQL(String file, String DbType){
+    
+	/* *********************************************************************************************************
+	 * GetEntitiesFromSQL
+	 * Affiche la liste des tables
+	 * 
+	 */ 
+    public ResultSet GetEntitiesFromSQL(String file, String DbType){
 
     	ResultSet results = null;    	
     	int numCols = 0;
     	System.out.print("start connection ");
     	//connection a la base de données
     	connection=ToolsDataBase.getConnection(file, DbType); 	
-
+    	
     	//Liste des éléments de la base (table, view...)
     	DatabaseMetaData dma;
+    	
 		try {
 			
 			dma = connection.getMetaData();
@@ -39,23 +45,15 @@ public class DecryptSQL {
 	    	types[0] = "TABLE"; //set table type mask (une valeur null permet de retrouver toutes les tables.)
 
 	    	results = dma.getTables(null, null, "%", types);
-	    	
-	    	while (results.next()) {
-	    		numCols= results.getMetaData().getColumnCount();
-	    		
-	    	   for (int i = 1; i <= numCols; i++)
-	    		   try{
-		    		   if(!results.getString(i).isEmpty()){
-		    			   System.out.print(results.getString(i)+" ");
-		    		   }	    			   
-	    		   } catch (java.lang.NullPointerException e) {}    	      
-	    	}			
+	    				
 	    	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//DbTools.arret("Echec de la methode GetEntityFromSQL");
 		}
+		
+		return results;
     	    		
     }
 	/* *********************************************************************************************************
