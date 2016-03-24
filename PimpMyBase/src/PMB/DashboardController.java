@@ -97,7 +97,7 @@ public class DashboardController {
 		}
        
         ElementsRoot = new TreeView<String> (rootItem);	
-
+        ElementsRoot.setShowRoot(true);
 	}
 
     public void handleWindowShownEvent()
