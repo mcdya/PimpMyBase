@@ -38,8 +38,20 @@
       		</ToolBar>
          </top>
          <left>
-            <TreeView fx:id="ElementsRoot" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <TreeView fx:id="ElementsRoot" prefHeight="200.0" prefWidth="200.0" styleClass="text-info" stylesheets="@../ressources/application.css" BorderPane.alignment="CENTER" />
          </left>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="ElementsTable" layoutX="1.0" layoutY="400.0" prefHeight="200.0" prefWidth="651.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </center>
       </BorderPane>
 	</children>
 	

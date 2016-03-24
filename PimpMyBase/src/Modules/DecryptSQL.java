@@ -61,9 +61,9 @@ public class DecryptSQL {
 	 * Creation et execution d'une requete SELECT à partir d'une table indiquée en paramètre
 	 * 
 	 */    
-    private void GetEntity(String Entity){
+    public ResultSet GetEntity(String Entity){
     	
-    	ResultSet résultats = null;    	
+    	ResultSet rs = null;    	
     	String requete = "";
     	
 		System.out.println("creation et execution de la requête SELECT pour la table "+Entity);
@@ -73,37 +73,12 @@ public class DecryptSQL {
 		try {
 
 			Statement stmt = connection.createStatement();
-			résultats = stmt.executeQuery(requete);
-
+			rs = stmt.executeQuery(requete);
+			
 		} catch (SQLException e) {
 			DbTools.arret("Anomalie lors de l'execution de la requête");
 		}
 
-		//Parcours des données retournées
-		try {
-
-			ResultSetMetaData rsmd = résultats.getMetaData();
-			int nbCols = rsmd.getColumnCount();
-			boolean encore = résultats.next();
-
-			while (encore) {
-
-				for (int i = 1; i <= nbCols; i++)
-
-					System.out.print(résultats.getString(i) + " ");
-
-				System.out.println();
-
-				encore = résultats.next();
-
-			}
-
-			résultats.close();
-
-		} catch (SQLException e) {
-
-			DbTools.arret(e.getMessage());
-
-		}     	
+    	return rs;
     }
 }
