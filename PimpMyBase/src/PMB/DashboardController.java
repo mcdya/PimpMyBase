@@ -199,11 +199,13 @@ public class DashboardController {
 	}
     public void handleWindowShownEvent()
     {
+    	
     	/*
     	System.out.println("BtnMenuClose pos "+BtnMenuClose.getLayoutX());
     	this.BtnMenuClose.setLayoutX(MainRoot.getPrefWidth()-BtnMenuClose.getMaxWidth()+100);
     	System.out.println("BtnMenuClose pos "+BtnMenuClose.getLayoutX());
     	*/
+    	
     }	
 	public void Close_DashBoard(){
 	    // close the dialog.
