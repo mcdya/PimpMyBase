@@ -13,18 +13,21 @@ import com.sun.glass.ui.Application;
 import Modules.DbTools;
 import Modules.DecryptSQL;
 import Modules.FileChooserMod;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class DashboardController {
 	@FXML private Button BtnMenuClose;
@@ -33,7 +36,8 @@ public class DashboardController {
 	@FXML private MenuBar MainMenuBar;	
 	@FXML private VBox MainRoot;
 	@FXML private TreeView<String> ElementsRoot;
-	@FXML private TableView ElementsTable = new TableView();
+	
+	@FXML private TableView<ObservableList<String>> ElementsTable;
 	
 	private DecryptSQL SQLmanager=new DecryptSQL();
 	private ResultSet TablesSet = null;  
@@ -143,7 +147,7 @@ public class DashboardController {
 		ResultSet rs = SQLmanager.GetEntity(TableSelect);
 		ObservableList<TableColumn> Cols = FXCollections.observableArrayList(); 
 		List<String> ListRws = new ArrayList<String>();
-		ObservableList<String> row = FXCollections.observableArrayList();
+		ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
 		
 		//Parcours des données retournées
 		try {
@@ -156,41 +160,42 @@ public class DashboardController {
 			ElementsTable.getColumns().clear();//reinitialisation des colonnes
 			ElementsTable.getItems().clear();//reinitialisation des lignes
 			
-			for (int i = 1; i <= nbCols; i++){
-				TableColumn NameCol = new TableColumn(rsmd.getColumnName(i));
-				NameCol.setCellValueFactory(new PropertyValueFactory(rsmd.getColumnName(i)));
+			for (int i = 0; i <= nbCols; i++){
+				final int j = i;
+				TableColumn NameCol = new TableColumn(rsmd.getColumnName(i+1));				
+                
+				NameCol.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
 
+				ElementsTable.getColumns().addAll(NameCol);
 				Cols.add(NameCol);	
 				
-			}			
-			ElementsTable.getColumns().addAll(Cols);
-			
-			/*
-			 * Creer une classe avec en paramètre le nom de la colonne et la valeur 
-			 * soit EntityClass(NameCol,Val)
-			 * faire une ObservableList<EntityClass> observableList()
-			 * TableView<EntityClass> ElementsTable;	
-			*/
+			}							
 			
 			while (encore) {
+				
+				ObservableList<String> row = FXCollections.observableArrayList();
 				String Line="";
+				
 				for (int i = 1; i <= nbCols; i++){
 					System.out.print(rs.getString(i) + " ");	
 					Line=Line+rs.getString(i) + " ";
 					row.add(rs.getString(i));
 				}
-				ListRws.add(Line);
+				data.add(row);
 				encore = rs.next();
 
 			}
-			
+			ElementsTable.setItems(data);
 			rs.close();
 
 		} catch (SQLException e) {
 			DbTools.arret(e.getMessage());
 		} 
-		ObservableList<String> observableList = FXCollections.observableList(ListRws);
-		ElementsTable.setItems(row);
+		
 	}
     public void handleWindowShownEvent()
     {
